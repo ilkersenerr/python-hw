@@ -6,7 +6,6 @@ from selenium.webdriver.support import expected_conditions as ec
 
 
 class SPX(unittest.TestCase):
-
     CATEGORY_PAGE = (By.CSS_SELECTOR, ".navigation__desktop-item")
     PRODUCT_PAGE = (By.CLASS_NAME, "product-card")
     CHOOSE_SIZE = (By.CSS_SELECTOR, ".mb-3.js-variant")
@@ -28,25 +27,26 @@ class SPX(unittest.TestCase):
         assert "SPX - Sport Point Extreme" in self.driver.title
 
         self.wait.until(ec.presence_of_all_elements_located(self.CATEGORY_PAGE))[1].click()
-        assert self.wait.until(ec.presence_of_all_elements_located(self.BREADCRUMB))[1].text == "ERKEK", True
+        assert self.wait.until(ec.presence_of_all_elements_located(self.BREADCRUMB))[1].text == "ERKEK", 'Yanlıs Kategori'
 
         self.wait.until(ec.presence_of_all_elements_located(self.PRODUCT_PAGE))[4].click()
-        assert len(self.wait.until(ec.presence_of_all_elements_located(self.BREADCRUMB)))>2
+        assert len(self.wait.until(ec.presence_of_all_elements_located(self.BREADCRUMB))) > 2, 'Yanlıs Urun'
 
         self.wait.until(ec.presence_of_all_elements_located(self.CHOOSE_SIZE))[2].click()
-        assert self.wait.until(ec.presence_of_all_elements_located(self.CHOOSE_SIZE))[2].text == "M", True
+        assert self.wait.until(ec.presence_of_all_elements_located(self.CHOOSE_SIZE))[2].text == "M", 'Hatalı beden secimi'
 
         self.wait.until(ec.element_to_be_clickable(self.ADD_TO_CART)).click()
-        assert self.wait.until(ec.presence_of_all_elements_located(self.ADD_TO_CART))[0].text == "SEPETE EKLE", True
+        assert self.wait.until(ec.presence_of_all_elements_located(self.ADD_TO_CART))[0].text == "SEPETE EKLE", 'Hatalı secim'
 
         self.wait.until(ec.element_to_be_clickable(self.CART_PAGE)).click()
-        assert "Sipariş Özeti" in self.driver.page_source
+        assert "Sipariş Özeti" in self.driver.page_source, 'Yanlıs Sayfa'
 
         self.wait.until(ec.element_to_be_clickable(self.MAIN_PAGE)).click()
-        assert self.wait.until(ec.presence_of_element_located(self.IS_ON_MAIN_PAGE))
+        assert self.wait.until(ec.presence_of_element_located(self.IS_ON_MAIN_PAGE)), 'Yanlıs Sayfa'
 
     def tearDown(self):
         self.driver.quit()
+
 
 if __name__ == '__main__':
     unittest.main()
