@@ -30,11 +30,11 @@ class SPX(unittest.TestCase):
         self.wait.until(ec.presence_of_all_elements_located(self.CATEGORY_PAGE))[1].click()
         assert self.wait.until(ec.presence_of_all_elements_located(self.BREADCRUMB))[1].text == "ERKEK", True
 
-        self.wait.until(ec.presence_of_all_elements_located(self.PRODUCT_PAGE))[3].click()
+        self.wait.until(ec.presence_of_all_elements_located(self.PRODUCT_PAGE))[4].click()
         assert len(self.wait.until(ec.presence_of_all_elements_located(self.BREADCRUMB)))>2
 
-        self.wait.until(ec.presence_of_all_elements_located(self.CHOOSE_SIZE))[1].click()
-        assert self.wait.until(ec.presence_of_all_elements_located(self.CHOOSE_SIZE))[0].text == "S", True
+        self.wait.until(ec.presence_of_all_elements_located(self.CHOOSE_SIZE))[2].click()
+        assert self.wait.until(ec.presence_of_all_elements_located(self.CHOOSE_SIZE))[2].text == "M", True
 
         self.wait.until(ec.element_to_be_clickable(self.ADD_TO_CART)).click()
         assert self.wait.until(ec.presence_of_all_elements_located(self.ADD_TO_CART))[0].text == "SEPETE EKLE", True
